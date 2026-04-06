@@ -495,13 +495,12 @@ urlRouter.post("/viewprofile",userauthmiddleware,async (req,res)=>{
     const user=await userModel.findOne({
         name:req.body.name,
     });
-    const data=await fetch(`http://localhost:${process.env.PORT}/url/getdata?userId=${user._id}`,{
-        method:"GET",
-        headers: {
-        "token": req.headers.token, 
-      },
-        
-    });
+    const data = await fetch(`https://project-backend-svus.onrender.com/url/getdata?userid=${user._id}`, {
+  method: "GET",
+  headers: {
+    "token": req.headers.token,
+  },
+});
     const convereteddata=await data.json();
     res.json({
         ...convereteddata
